@@ -14,7 +14,7 @@ import ChallengeStatus from '../ChallengeStatus'
 import TrackIcon from '../../TrackIcon'
 import styles from './ChallengeCard.module.scss'
 import { getFormattedDuration, getLastDate } from '../../../util/date'
-import { CHALLENGE_STATUS, getForumURL } from '../../../config/constants'
+import { CHALLENGE_STATUS, COMMUNITY_APP_URL } from '../../../config/constants'
 
 const STALLED_MSG = 'Stalled'
 const DRAFT_MSG = 'In Draft'
@@ -87,18 +87,11 @@ const hoverComponents = (challenge) => {
   switch (challenge.status) {
     case CHALLENGE_STATUS.DRAFT:
       return (<ChallengeStatus status={CHALLENGE_STATUS.ACTIVE} isBig={challenge.status !== ''} />)
-    case CHALLENGE_STATUS.COMPLETED:
-      return (
-        <div className={cn(styles.linkGroup, styles.onlyOne)}>
-          <a className={styles.link} href={getForumURL(challenge.forumId)}>View Forum</a>
-        </div>
-      )
     case CHALLENGE_STATUS.ACTIVE:
     default:
       return (
         <div className={styles.linkGroup}>
           <Link className={styles.link} to={`/projects/12738/challenges/${challenge.id}/edit`}>Edit</Link>
-          <a className={styles.link} href={getForumURL(challenge.forumId)}>View Forum</a>
         </div>
       )
   }
@@ -116,31 +109,13 @@ const renderStatus = (status) => {
 }
 
 class ChallengeCard extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      isHover: false
-    }
-    this.toggleHover = this.toggleHover.bind(this)
-    this.removeHover = this.removeHover.bind(this)
-  }
-
-  toggleHover () {
-    this.setState({ isHover: true })
-  }
-
-  removeHover () {
-    this.setState({ isHover: false })
-  }
-
   render () {
     const { challenge } = this.props
     const { phaseMessage, endTime } = getPhaseInfo(challenge)
-    const { isHover } = this.state
 
     return (
-      <div className={styles.item} onMouseEnter={this.toggleHover} onMouseLeave={this.removeHover}>
-        <Link className={styles.col1} to={`/challenges/${challenge.id}`}>
+      <div className={styles.item}>
+        <a className={styles.col1} href={`${COMMUNITY_APP_URL}/challenges/${challenge.id}`}>
           <div>
             <TrackIcon className={styles.icon} track={challenge.track} subTrack={challenge.subTrack} />
           </div>
@@ -148,35 +123,27 @@ class ChallengeCard extends React.Component {
             <span className={styles.block}>{challenge.name}</span>
             <span className='block light-text'>Ends {getEndDate(challenge)}</span>
           </div>
-        </Link>
-        <Link className={styles.col2} to={`/challenges/${challenge.id}`}>
-          { renderStatus(challenge.status) }
-        </Link>
-        <Link className={styles.col3} to={`/challenges/${challenge.id}`}>
+        </a>
+        <a className={styles.col2} href={`${COMMUNITY_APP_URL}/challenges/${challenge.id}`}>
+          {renderStatus(challenge.status)}
+        </a>
+        <a className={styles.col3} href={`${COMMUNITY_APP_URL}/challenges/${challenge.id}`}>
           <span className={styles.block}>{phaseMessage}</span>
           <span className='block light-text'>{endTime}</span>
-        </Link>
-        {
-          isHover && (
-            <div className={styles.col4}>
-              {hoverComponents(challenge)}
-            </div>
-          )
-        }
-        {
-          !isHover && (
-            <div className={styles.col4}>
-              <div className={styles.faIconContainer}>
-                <FontAwesomeIcon icon={faUser} className={styles.faIcon} />
-                <span>{challenge.numRegistrants}</span>
-              </div>
-              <div className={styles.faIconContainer}>
-                <FontAwesomeIcon icon={faFile} className={styles.faIcon} />
-                <span>{challenge.numSubmissions}</span>
-              </div>
-            </div>
-          )
-        }
+        </a>
+        <div className={cn(styles.col4, styles.editingContainer)}>
+          {hoverComponents(challenge)}
+        </div>
+        <div className={cn(styles.col4, styles.iconsContainer)}>
+          <div className={styles.faIconContainer}>
+            <FontAwesomeIcon icon={faUser} className={styles.faIcon} />
+            <span>{challenge.numRegistrants}</span>
+          </div>
+          <div className={styles.faIconContainer}>
+            <FontAwesomeIcon icon={faFile} className={styles.faIcon} />
+            <span>{challenge.numSubmissions}</span>
+          </div>
+        </div>
       </div>
     )
   }

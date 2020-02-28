@@ -1,0 +1,30 @@
+{
+  "keywords": [ ".NET", "API", "NodeJS", "Angular", "Android", "C++", "ReactJS", "SASS"],
+  "terms": [ "Standard Topcoder Terms", "Project Customer Term", "Non Disclosure Agreement(NDA)"],
+  "newChallenge": {
+    "track": "",
+    "typeId": "",
+    "name": "",
+    "copilot": "",
+    "reviewType": "community",
+    "terms": [
+        "Standard Topcoder Terms"
+    ],
+    "groups": [],
+    "phases": [],
+    "description": "",
+    "tags": [],
+    "attachments": [],
+    "prizes": [
+      {
+        "type": "money",
+        "amount": ""
+      }
+    ],
+    "prizeSets": [],
+    "reviewCost": "",
+    "challengeFee": "",
+    "copilotFee": "",
+    "challengeTotalAmount": ""
+  }
+}

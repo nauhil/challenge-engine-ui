@@ -36,12 +36,14 @@
     "eslint-plugin-standard": "^4.0.0",
     "express": "^4.16.4",
     "file-loader": "2.0.0",
+    "form-data": "^2.4.0",
     "fs-extra": "7.0.0",
     "html-webpack-plugin": "4.0.0-alpha.2",
     "identity-obj-proxy": "3.0.0",
     "jest": "23.6.0",
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
+    "jstimezonedetect": "^1.0.6",
     "lodash": "^4.17.11",
     "mini-css-extract-plugin": "0.4.3",
     "moment": "^2.24.0",
@@ -61,8 +63,11 @@
     "react-day-picker": "^7.3.0",
     "react-dev-utils": "^7.0.1",
     "react-dom": "^16.7.0",
+    "react-dropzone": "^10.1.5",
+    "react-google-charts": "^3.0.13",
     "react-helmet": "^5.2.0",
     "react-redux": "^6.0.0",
+    "react-redux-toastr": "^7.5.1",
     "react-router-dom": "^4.3.1",
     "react-select": "^1.2.0",
     "react-stickynode": "^2.1.1",
@@ -71,6 +76,7 @@
     "redux-thunk": "^2.3.0",
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
+    "simplemde": "^1.11.2",
     "style-loader": "0.23.0",
     "tc-accounts": "git+https://github.com/appirio-tech/accounts-app.git#dev",
     "terser": "^3.16.1",
@@ -78,7 +84,8 @@
     "url-loader": "1.1.1",
     "webpack": "4.19.1",
     "webpack-dev-server": "3.1.14",
-    "webpack-manifest-plugin": "2.0.4"
+    "webpack-manifest-plugin": "2.0.4",
+    "xss": "^1.0.6"
   },
   "scripts": {
     "start": "node server.js",
@@ -139,6 +146,9 @@
       "web.jsx",
       "jsx",
       "node"
+    ],
+    "modulePathIgnorePatterns": [
+      "node_modules"
     ]
   },
   "babel": {

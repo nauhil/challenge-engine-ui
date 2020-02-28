@@ -3,7 +3,7 @@
  */
 // import _ from 'lodash'
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { SIDEBAR_MENU, CHALLENGE_STATUS } from '../../config/constants'
@@ -26,9 +26,6 @@ class Challenges extends Component {
   componentWillReceiveProps (nextProps) {
     const { activeMenu, projectId, activeProjectId } = nextProps
     const { activeMenu: oldActiveMenu, projectId: oldProjectId, activeProjectId: oldActiveProjectId } = this.props
-    console.log(`projectId: ${projectId}, oldProjectId: ${oldProjectId}`)
-    console.log(`activeProjectId: ${activeProjectId}, oldActiveProjectId: ${oldActiveProjectId}`)
-    console.log(`activeMenu: ${activeMenu}`)
     if (activeMenu !== oldActiveMenu || projectId !== oldProjectId || activeProjectId !== oldActiveProjectId) {
       const status = activeMenu === SIDEBAR_MENU.ACTIVE_CHALLENGES ? CHALLENGE_STATUS.ACTIVE : ''
       this.props.loadChallenges(activeProjectId, status)
@@ -43,11 +40,7 @@ class Challenges extends Component {
   }
 
   render () {
-    const { challenges, isLoading, activeProjectId, projectId, activeMenu, menu } = this.props
-    const { projectChanged } = this.state
-    if (projectChanged && (menu !== activeMenu || projectId !== activeProjectId.toString())) {
-      return <Redirect to={{ pathname: `/projects/${activeProjectId}/challenges/active` }} />
-    }
+    const { challenges, isLoading, activeMenu } = this.props
 
     return (
       <ChallengesComponent challenges={challenges} isLoading={isLoading} activeMenu={activeMenu} />
@@ -61,8 +54,7 @@ Challenges.propTypes = {
   loadChallenges: PropTypes.func,
   activeMenu: PropTypes.string,
   projectId: PropTypes.string,
-  activeProjectId: PropTypes.number,
-  menu: PropTypes.string
+  activeProjectId: PropTypes.number
 }
 
 const mapStateToProps = ({ challenges, sidebar }) => ({

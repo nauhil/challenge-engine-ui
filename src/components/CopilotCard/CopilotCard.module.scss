@@ -10,8 +10,25 @@
   border-radius: 20px;
   cursor: pointer;
 
+  div {
+    width: 40px;
+    height: 40px;
+
+    svg {
+      fill: $gray;
+    }
+  }
+
   &.active {
     border-color: $tc-blue-20;
+
+    &:hover {
+      border-color: $tc-blue-20;      
+    }
+  }
+
+  &:hover {
+    border-color: $tc-handle-gray;   
   }
 
   img {
